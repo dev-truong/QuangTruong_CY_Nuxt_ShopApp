@@ -1,20 +1,25 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import {routes} from "./routes";
+import type {NuxtPage} from "@nuxt/schema";
 export default defineNuxtConfig({
   css: ["~/assets/css/main.css"],
+
   postcss: {
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
     },
   },
+
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
+
   app: {
     head: {
       title: 'ShopApp by Nuxt',
     }
   },
+
   hooks: {
     'pages:extend' (pages) {
       routes.forEach(route => {
@@ -37,5 +42,9 @@ export default defineNuxtConfig({
       }
       removePagesMatching(/\.ts$/, pages)
     }
-  }
+  },
+  modules: [
+    // ...
+    '@pinia/nuxt',
+  ],
 })
